@@ -1,0 +1,6 @@
+monolog:
+  handlers:
+    service_loggs:
+      type: gelf
+      publisher: service_upd_publisher
+      formatter: monolog.formatter.gelf_message
