@@ -1,0 +1,21 @@
+parameters:
+  service_name: 'bonus_service_name'
+  
+  logstash_host: 'logstash.n0d.io'
+  logstash_port: 12201
+
+services:
+  _defaults:
+    autowire: true
+    public: false
+    autoconfigure: true
+    
+  Service\LoggerExtraBundle\:
+    resource: '../{Logger,EventListener,Processor}'    
+        
+  service_upd_publisher:
+    class: Gelf\Publisher
+    arguments: [ "@gelf.udp_transport" ]
+  gelf.udp_transport:
+    class: Gelf\Transport\UdpTransport
+    arguments: ['%logstash_host%', '%logstash_port%']    
