@@ -2,9 +2,9 @@
 
 namespace Playtini\LoggerExtraBundle\DependencyInjection;
 
-use Service\LoggerExtraBundle\EventListener\CommandListener;
-use Service\LoggerExtraBundle\Processor\AdditionsProcessor;
-use Service\LoggerExtraBundle\Processor\MainProcessor;
+use Playtini\LoggerExtraBundle\EventListener\CommandListener;
+use Playtini\LoggerExtraBundle\Processor\AdditionsProcessor;
+use Playtini\LoggerExtraBundle\Processor\MainProcessor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
