@@ -1,5 +1,5 @@
 {
-    "name": "service/logger-extra-bundle",
+    "name": "playtini/logger-extra-bundle",
     "description": "Add logs additional info",
     "type": "symfony-bundle",
     "license": "proprietary",
@@ -12,18 +12,18 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=7.4",
-        "symfony/config": "^5.3",
-        "symfony/dependency-injection": "^5.3",
-        "symfony/event-dispatcher": "^5.3",
-        "symfony/http-kernel": "^5.3",
-        "symfony/console": "^5.3",
-        "symfony/yaml": "^5.3",
+        "symfony/config": "^5.2",
+        "symfony/dependency-injection": "^5.2",
+        "symfony/event-dispatcher": "^5.2",
+        "symfony/http-kernel": "^5.2",
+        "symfony/console": "^5.2",
+        "symfony/yaml": "^5.2",
         "graylog2/gelf-php": "^1.7",
         "ext-json": "*"
     },
     "autoload": {
         "psr-4": {
-            "Service\\LoggerExtraBundle\\": "src/"
+            "Playtini\\LoggerExtraBundle\\": "src/"
         }
     }
 }

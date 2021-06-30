@@ -1,7 +1,7 @@
 parameters:
-  service_name: 'bonus_service_name'
+  service_name: 'service'
   
-  logstash_host: 'logstash.n0d.io'
+  logstash_host: '127.0.0.1'
   logstash_port: 12201
 
 services:
