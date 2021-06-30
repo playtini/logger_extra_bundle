@@ -1,6 +1,6 @@
 <?php
 
-namespace Service\LoggerExtraBundle\Processor;
+namespace Playtini\LoggerExtraBundle\Processor;
 
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Service\LoggerExtraBundle\DependencyInjection;
+namespace Playtini\LoggerExtraBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

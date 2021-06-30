@@ -1,6 +1,6 @@
 <?php
 
-namespace Service\LoggerExtraBundle;
+namespace Playtini\LoggerExtraBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
