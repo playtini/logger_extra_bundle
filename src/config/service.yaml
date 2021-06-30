@@ -10,7 +10,7 @@ services:
     public: false
     autoconfigure: true
     
-  Service\LoggerExtraBundle\:
+  Playtini\LoggerExtraBundle\:
     resource: '../{Logger,EventListener,Processor}'    
         
   service_upd_publisher:
