@@ -1,6 +1,6 @@
 <?php
 
-namespace Service\LoggerExtraBundle\DependencyInjection;
+namespace Playtini\LoggerExtraBundle\DependencyInjection;
 
 use Service\LoggerExtraBundle\EventListener\CommandListener;
 use Service\LoggerExtraBundle\Processor\AdditionsProcessor;

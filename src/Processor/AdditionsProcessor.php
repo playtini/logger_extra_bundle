@@ -1,6 +1,6 @@
 <?php
 
-namespace Service\LoggerExtraBundle\Processor;
+namespace Playtini\LoggerExtraBundle\Processor;
 
 class AdditionsProcessor
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Service\LoggerExtraBundle\EventListener;
+namespace Playtini\LoggerExtraBundle\EventListener;
 
-use Service\LoggerExtraBundle\Logger\CommandLoggerInterface;
+use Playtini\LoggerExtraBundle\Logger\CommandLoggerInterface;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\Console\Event\ConsoleErrorEvent;
 use Symfony\Component\Console\Event\ConsoleTerminateEvent;

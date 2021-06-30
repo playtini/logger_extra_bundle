@@ -1,6 +1,6 @@
 <?php
 
-namespace Service\LoggerExtraBundle\Logger;
+namespace Playtini\LoggerExtraBundle\Logger;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;

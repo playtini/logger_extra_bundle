@@ -1,6 +1,6 @@
 <?php
 
-namespace Service\LoggerExtraBundle\Logger;
+namespace Playtini\LoggerExtraBundle\Logger;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
