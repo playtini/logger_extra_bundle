@@ -1,6 +1,6 @@
 parameters:
   service_name: 'service'
-  
+  log_env: 'dev'
   logstash_host: '127.0.0.1'
   logstash_port: 12201
 
@@ -16,6 +16,7 @@ services:
   service_upd_publisher:
     class: Gelf\Publisher
     arguments: [ "@gelf.udp_transport" ]
+
   gelf.udp_transport:
     class: Gelf\Transport\UdpTransport
     arguments: ['%logstash_host%', '%logstash_port%']    

@@ -16,7 +16,7 @@ class MainProcessor
     public function __invoke(array $record): array
     {
         $recordExtra = [
-            'environment' => $this->parameterBag->get('kernel.environment'),
+            'environment' => $this->parameterBag->get('log_env') ?: $this->parameterBag->get('kernel.environment'),
             'service_name' => $this->parameterBag->get('service_name'),
         ];
         
