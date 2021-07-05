@@ -3,6 +3,7 @@
 namespace Playtini\LoggerExtraBundle\DependencyInjection;
 
 use Playtini\LoggerExtraBundle\EventListener\CommandListener;
+use Playtini\LoggerExtraBundle\EventListener\RequestListener;
 use Playtini\LoggerExtraBundle\Processor\AdditionsProcessor;
 use Playtini\LoggerExtraBundle\Processor\MainProcessor;
 use Symfony\Component\Config\FileLocator;
@@ -11,6 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Yaml\Parser;
 
 class ServiceLoggerExtraExtension extends Extension implements PrependExtensionInterface
@@ -64,5 +66,20 @@ class ServiceLoggerExtraExtension extends Extension implements PrependExtensionI
             ->addTag('kernel.event_listener', ['event' => ConsoleEvents::TERMINATE, 'method' => 'onTerminateResponse'])
             ->addTag('kernel.event_listener', ['event' => ConsoleEvents::ERROR, 'method' => 'onConsoleException'])
         ;
+    }
+
+    protected function addRequestResponseListener(ContainerBuilder $container, array $config)
+    {
+        if (!$config['logger']['on_request']) {
+            $container->removeDefinition(RequestListener::class);
+
+            return;
+        }
+
+        if ($config['logger']['on_request']) {
+            $container->getDefinition(RequestListener::class)
+                ->addTag('kernel.event_listener', ['event' => KernelEvents::REQUEST, 'method' => 'onRequest'])
+                ->addTag('kernel.event_listener', ['event' => KernelEvents::RESPONSE, 'method' => 'onResponse']);
+        }
     }
 }
