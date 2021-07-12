@@ -47,7 +47,7 @@ in the `config/bundles.php` file of your project:
 
 return [
     // ...
-    Service\LoggerExtraBundle\ServiceLoggerExtraBundle::class => ['all' => true],
+    Playtini\LoggerExtraBundle\ServiceLoggerExtraBundle::class => ['all' => true],
 ];
 ```
 
@@ -56,7 +56,7 @@ return [
 #### Additions
 Add custom data in each log entry.
 ```yaml
-service_extra_logger:
+service_logger_extra:
     processor:
         additions:
             key_addition_var_1: value_addition_var_1
@@ -71,7 +71,7 @@ By default, the bundle provides several loggers:
 
 Add config to include them:
 ```yaml
-service_extra_logger:
+service_logger_extra:
   logger:
     on_command: true
     on_request: true
