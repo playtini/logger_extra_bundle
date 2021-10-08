@@ -22,12 +22,20 @@ class RequestLogger implements RequestLoggerInterface
     public function logRequest(Request $request): void
     {
         $msg = "{$this->parameterBag->get('service_name')}.request.{$request->getMethod()}";
+
+        $params = [];
+        if ($request->getMethod() === Request::METHOD_GET) {
+            $params = $request->query->all();
+        }
+        if ($request->getMethod() === Request::METHOD_POST) {
+            $params = $request->toArray();
+        }
         
         $this->logger->info($msg, [
             'ip' => $request->getClientIp(),
             'url' => $request->getUri(),
             'request_method' => $request->getMethod(),
-            'request_body_params' => $this->stringify($request->toArray()),
+            'request_body_params' => $this->stringify($params),
         ]);
     }
 
