@@ -24,7 +24,7 @@ class ServiceLoggerExtraExtension extends Extension implements PrependExtensionI
             if ($name === 'MonologBundle') {
                 $config = (new Parser())->parse(file_get_contents(__DIR__ . '/../config/monolog.yaml'));
                 $container->prependExtensionConfig('monolog', $config['monolog']);
-                
+
                 break;
             }
         }
@@ -34,19 +34,20 @@ class ServiceLoggerExtraExtension extends Extension implements PrependExtensionI
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-        
+
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../config'));
         $loader->load('service.yaml');
-        
+
         $this->addProcessors($container, $config);
         $this->addCommandListener($container, $config);
+        $this->addRequestResponseListener($container, $config);
     }
 
     protected function addProcessors(ContainerBuilder $container, array $config): void
     {
         $definition = $container->getDefinition(MainProcessor::class);
         $definition->addTag('monolog.processor');
-        
+
         $definition = $container->getDefinition(AdditionsProcessor::class);
         $definition
             ->addTag('monolog.processor')
@@ -57,10 +58,10 @@ class ServiceLoggerExtraExtension extends Extension implements PrependExtensionI
     {
         if (!$config['logger']['on_command']) {
             $container->removeDefinition(CommandListener::class);
-            
+
             return;
         }
-   
+
         $container->getDefinition(CommandListener::class)
             ->addTag('kernel.event_listener', ['event' => ConsoleEvents::COMMAND, 'method' => 'onCommandResponse'])
             ->addTag('kernel.event_listener', ['event' => ConsoleEvents::TERMINATE, 'method' => 'onTerminateResponse'])

@@ -3,33 +3,37 @@
 namespace Playtini\LoggerExtraBundle\Logger;
 
 use Psr\Log\LoggerInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class RequestLogger implements RequestLoggerInterface
 {
+    private ParameterBagInterface $parameterBag;
+    
     protected LoggerInterface $logger;
 
-    public function __construct(LoggerInterface $logger)
+    public function __construct(ParameterBagInterface $parameterBag, LoggerInterface $logger)
     {
+        $this->parameterBag = $parameterBag;
         $this->logger = $logger;
     }
 
     public function logRequest(Request $request): void
     {
-        $msg = "Request {$request->getMethod()} {$request->getRequestUri()}";
+        $msg = "{$this->parameterBag->get('service_name')}.request.{$request->getMethod()}";
         
         $this->logger->info($msg, [
             'ip' => $request->getClientIp(),
             'url' => $request->getUri(),
-            'query' => $this->stringify($request->query->all()),
-            'request' =>  $this->stringify($request->request->all()),
+            'request_method' => $request->getMethod(),
+            'request_body_params' => $this->stringify($request->toArray()),
         ]);
     }
 
     public function logResponse(Request $request, Response $response): void
     {
-        $msg = "Response {$request->getMethod()} {$request->getRequestUri()}";
+        $msg = "{$this->parameterBag->get('service_name')}.response.{$request->getMethod()}";
         
         $this->logger->info($msg, [
             'request_ip' => $request->getClientIp(),

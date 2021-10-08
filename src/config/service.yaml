@@ -1,8 +1,11 @@
 parameters:
-  service_name: 'service'
-  log_env: 'dev'
-  logstash_host: '127.0.0.1'
-  logstash_port: 12201
+  env(SERVICE_NAME): 'noname-service'
+  env(LOGSTASH_HOST): 127.0.0.1
+  env(LOGSTASH_PORT): 12201
+  
+  service_name: '%env(string:SERVICE_NAME)%'
+  logstash_host: '%env(string:LOGSTASH_HOST)%'
+  logstash_port: '%env(int:LOGSTASH_PORT)%'
 
 services:
   _defaults:
