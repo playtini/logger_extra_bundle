@@ -2,7 +2,6 @@ monolog:
   handlers:
     service_loggs:
       type: gelf
-      level: info
       publisher: service_upd_publisher
       formatter: monolog.formatter.gelf_message
     grouped:
