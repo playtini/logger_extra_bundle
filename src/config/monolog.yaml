@@ -4,6 +4,8 @@ monolog:
       type: gelf
       publisher: service_upd_publisher
       formatter: monolog.formatter.gelf_message
+      channels: ['!event', '!php', '!translation', '!security']
+      level: info
     grouped:
       type: whatfailuregroup
       members: [service_loggs]
