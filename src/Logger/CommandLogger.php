@@ -19,7 +19,7 @@ class CommandLogger implements CommandLoggerInterface
     {
         $context = $this->createContext($command, $input);
         if (!$exception) {
-            $this->logger->info($message, $context);
+            $this->logger->debug($message, $context);
             
             return;
         }

@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 class RequestLogger implements RequestLoggerInterface
 {
     private ParameterBagInterface $parameterBag;
-    
+
     protected LoggerInterface $logger;
 
     public function __construct(ParameterBagInterface $parameterBag, LoggerInterface $logger)
@@ -21,6 +21,10 @@ class RequestLogger implements RequestLoggerInterface
 
     public function logRequest(Request $request): void
     {
+        if (str_contains($request->getUri(), 'health')) {
+            return;
+        }
+
         $msg = "{$this->parameterBag->get('service_name')}.request.{$request->getMethod()}";
 
         $params = [];
@@ -30,8 +34,8 @@ class RequestLogger implements RequestLoggerInterface
         if ($request->getMethod() === Request::METHOD_POST) {
             $params = $request->toArray();
         }
-        
-        $this->logger->info($msg, [
+
+        $this->logger->debug($msg, [
             'ip' => $request->getClientIp(),
             'url' => $request->getUri(),
             'request_method' => $request->getMethod(),
@@ -42,8 +46,8 @@ class RequestLogger implements RequestLoggerInterface
     public function logResponse(Request $request, Response $response): void
     {
         $msg = "{$this->parameterBag->get('service_name')}.response.{$request->getMethod()}";
-        
-        $this->logger->info($msg, [
+
+        $this->logger->debug($msg, [
             'request_ip' => $request->getClientIp(),
             'request_url' => $request->getUri(),
             'response_status_code' => $response->getStatusCode(),
@@ -61,29 +65,29 @@ class RequestLogger implements RequestLoggerInterface
                 $data = (string)$data;
             }
         }
-        
+
         return substr($data, 0, 10000);
     }
 
     private function getMemoryUsage() : int
     {
         $memory = memory_get_peak_usage(true);
-        
+
         return $memory > 1024 ? (int) ($memory / 1024) : 0;
     }
 
     private function getResponseTime(Request $request) : ?int
     {
         if (!$request->server) {
-            
+
             return null;
         }
 
         $requestTime = $request->server->get('REQUEST_TIME_FLOAT', $request->server->get('REQUEST_TIME'));
-        
+
         $reqMilliSecond = (int) ($requestTime * 1000);
         $resMilliSecond = (int) (microtime(true) * 1000);
-        
+
         return $resMilliSecond - $reqMilliSecond;
     }
 }
