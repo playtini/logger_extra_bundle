@@ -45,6 +45,10 @@ class RequestLogger implements RequestLoggerInterface
 
     public function logResponse(Request $request, Response $response): void
     {
+        if (str_contains($request->getUri(), 'health')) {
+            return;
+        }
+
         $msg = "{$this->parameterBag->get('service_name')}.response.{$request->getMethod()}";
 
         $this->logger->info($msg, [
