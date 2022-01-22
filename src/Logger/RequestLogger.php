@@ -35,7 +35,7 @@ class RequestLogger implements RequestLoggerInterface
             $params = $request->toArray();
         }
 
-        $this->logger->debug($msg, [
+        $this->logger->info($msg, [
             'ip' => $request->getClientIp(),
             'url' => $request->getUri(),
             'request_method' => $request->getMethod(),
@@ -47,7 +47,7 @@ class RequestLogger implements RequestLoggerInterface
     {
         $msg = "{$this->parameterBag->get('service_name')}.response.{$request->getMethod()}";
 
-        $this->logger->debug($msg, [
+        $this->logger->info($msg, [
             'request_ip' => $request->getClientIp(),
             'request_url' => $request->getUri(),
             'response_status_code' => $response->getStatusCode(),

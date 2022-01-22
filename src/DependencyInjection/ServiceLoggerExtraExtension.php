@@ -3,6 +3,7 @@
 namespace Playtini\LoggerExtraBundle\DependencyInjection;
 
 use Playtini\LoggerExtraBundle\EventListener\CommandListener;
+use Playtini\LoggerExtraBundle\EventListener\ErrorListener;
 use Playtini\LoggerExtraBundle\EventListener\RequestListener;
 use Playtini\LoggerExtraBundle\Processor\AdditionsProcessor;
 use Playtini\LoggerExtraBundle\Processor\MainProcessor;
@@ -41,6 +42,7 @@ class ServiceLoggerExtraExtension extends Extension implements PrependExtensionI
         $this->addProcessors($container, $config);
         $this->addCommandListener($container, $config);
         $this->addRequestResponseListener($container, $config);
+        $this->addErrorListener($container, $config);
     }
 
     protected function addProcessors(ContainerBuilder $container, array $config): void
@@ -77,9 +79,16 @@ class ServiceLoggerExtraExtension extends Extension implements PrependExtensionI
             return;
         }
 
-        if ($config['logger']['on_request']) {
-            $container->getDefinition(RequestListener::class)
-                ->addTag('kernel.event_listener', ['event' => KernelEvents::REQUEST, 'method' => 'onRequest']);
-        }
+        $container->getDefinition(RequestListener::class)
+            ->addTag('kernel.event_listener', ['event' => KernelEvents::REQUEST, 'method' => 'onRequest'])
+            ->addTag('kernel.event_listener', ['event' => KernelEvents::RESPONSE, 'method' => 'onResponse'])
+        ;
+    }
+
+    protected function addErrorListener(ContainerBuilder $container, array $config): void
+    {
+        $container->getDefinition(ErrorListener::class)
+            ->addTag('kernel.event_listener', ['event' => KernelEvents::EXCEPTION, 'method' => 'onError'])
+        ;
     }
 }
