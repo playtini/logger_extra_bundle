@@ -32,7 +32,9 @@ class RequestLogger implements RequestLoggerInterface
             $params = $request->query->all();
         }
         if ($request->getMethod() === Request::METHOD_POST) {
-            $params = $request->toArray();
+            if ($request->getContent()) {
+                $params = $request->toArray();
+            }
         }
 
         $this->logger->info($msg, [
