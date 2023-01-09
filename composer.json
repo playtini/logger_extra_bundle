@@ -12,12 +12,12 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=7.4",
-        "symfony/config": "^5.2",
-        "symfony/dependency-injection": "^5.2",
-        "symfony/event-dispatcher": "^5.2",
-        "symfony/http-kernel": "^5.2",
-        "symfony/console": "^5.2",
-        "symfony/yaml": "^5.2",
+        "symfony/config": "^5.2|^6.0",
+        "symfony/dependency-injection": "^5.2|^6.0",
+        "symfony/event-dispatcher": "^5.2|^6.0",
+        "symfony/http-kernel": "^5.2|^6.0",
+        "symfony/console": "^5.2|^6.0",
+        "symfony/yaml": "^5.2|^6.0",
         "graylog2/gelf-php": "^1.7",
         "ext-json": "*"
     },
