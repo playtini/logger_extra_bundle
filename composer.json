@@ -12,13 +12,13 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=7.4",
-        "symfony/config": "^5.2|^6.0",
-        "symfony/dependency-injection": "^5.2|^6.0",
-        "symfony/event-dispatcher": "^5.2|^6.0",
-        "symfony/http-kernel": "^5.2|^6.0",
-        "symfony/console": "^5.2|^6.0",
-        "symfony/yaml": "^5.2|^6.0",
-        "graylog2/gelf-php": "^1.7",
+        "symfony/config": "^5.2|^6.0|^7.1",
+        "symfony/dependency-injection": "^5.2|^6.0|^7.1",
+        "symfony/event-dispatcher": "^5.2|^6.0|^7.1",
+        "symfony/http-kernel": "^5.2|^6.0|^7.1",
+        "symfony/console": "^5.2|^6.0|^7.1",
+        "symfony/yaml": "^5.2|^6.0|^7.1",
+        "graylog2/gelf-php": "^1.7|^2.0",
         "ext-json": "*"
     },
     "autoload": {
